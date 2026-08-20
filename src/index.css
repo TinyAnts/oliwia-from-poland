@@ -1,0 +1,175 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Fraunces', serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
+:root {
+  /* Warm ivory canvas */
+  --background: 30 60% 97%;
+  --foreground: 18 35% 13%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 18 35% 13%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 18 35% 13%;
+
+  /* Rich coral */
+  --primary: 10 78% 58%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Rose blush */
+  --secondary: 345 70% 92%;
+  --secondary-foreground: 18 35% 20%;
+
+  --muted: 28 30% 93%;
+  --muted-foreground: 20 15% 42%;
+
+  /* Soft gold */
+  --accent: 40 75% 90%;
+  --accent-foreground: 25 40% 22%;
+
+  --destructive: 350 75% 55%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 25 25% 88%;
+  --input: 25 25% 88%;
+  --ring: 10 78% 58%;
+
+  --radius: 1.25rem;
+}
+
+.dark {
+  --background: 20 20% 9%;
+  --foreground: 30 25% 95%;
+  --card: 20 15% 13%;
+  --card-foreground: 30 25% 95%;
+  --popover: 20 15% 13%;
+  --popover-foreground: 30 25% 95%;
+  --primary: 10 72% 58%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 340 25% 20%;
+  --secondary-foreground: 30 25% 95%;
+  --muted: 20 12% 18%;
+  --muted-foreground: 30 12% 65%;
+  --accent: 35 25% 20%;
+  --accent-foreground: 30 25% 95%;
+  --destructive: 350 70% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 20 12% 20%;
+  --input: 20 12% 20%;
+  --ring: 10 72% 58%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(100deg, hsl(10 78% 58%), hsl(340 75% 62%), hsl(28 90% 58%));
+  }
+
+  .bg-hero-gradient {
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 10%, hsl(345 80% 88% / 0.55), transparent 60%),
+      radial-gradient(ellipse 50% 45% at 5% 85%, hsl(38 85% 85% / 0.6), transparent 60%),
+      radial-gradient(ellipse 45% 40% at 50% 110%, hsl(10 80% 85% / 0.35), transparent 60%);
+  }
+
+  .font-display-italic {
+    font-style: italic;
+    font-variation-settings: "SOFT" 60, "WONK" 1;
+  }
+}
+
+/* ---- Animations ---- */
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.08); }
+  66% { transform: translate(-25px, 25px) scale(0.95); }
+}
+.animate-blob {
+  animation: blob-drift 14s ease-in-out infinite;
+}
+.animate-blob-slow {
+  animation: blob-drift 20s ease-in-out infinite reverse;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float {
+  animation: float-y 5s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float-y 6.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-blob, .animate-blob-slow,
+  .animate-float, .animate-float-delayed, .animate-spin-slow {
+    animation: none;
+  }
+}
