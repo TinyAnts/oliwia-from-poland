@@ -14,10 +14,15 @@ import {
   MousePointer2,
   Calendar,
   ArrowUpRight,
+  ArrowUp,
   Sparkles,
   Heart,
   Menu,
-  X
+  X,
+  Video,
+  Camera,
+  Megaphone,
+  Handshake
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -95,6 +100,29 @@ function CircleBadge() {
         </g>
       </svg>
     </div>
+  );
+}
+
+/* Floating back-to-top button */
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 700);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <motion.button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Back to top"
+      initial={false}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 16, pointerEvents: visible ? "auto" : "none" }}
+      transition={{ duration: 0.25 }}
+      className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-primary/90 hover:-translate-y-1 transition-all"
+      data-testid="button-back-to-top"
+    >
+      <ArrowUp size={20} />
+    </motion.button>
   );
 }
 
@@ -179,6 +207,7 @@ export default function Home() {
             <button onClick={() => scrollTo('about')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-about">About</button>
             <button onClick={() => scrollTo('services')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-services">Services</button>
             <button onClick={() => scrollTo('how-it-works')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-how">How It Works</button>
+            <button onClick={() => scrollTo('for-brands')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-brands">For Brands</button>
             <button onClick={() => scrollTo('faq')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-faq">FAQ</button>
             <Button onClick={() => scrollTo('services')} className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20" data-testid="button-nav-book">
               Book Now
@@ -197,6 +226,7 @@ export default function Home() {
           <button onClick={() => scrollTo('about')} className="text-xl font-medium text-left" data-testid="link-mobile-about">About</button>
           <button onClick={() => scrollTo('services')} className="text-xl font-medium text-left" data-testid="link-mobile-services">Services</button>
           <button onClick={() => scrollTo('how-it-works')} className="text-xl font-medium text-left" data-testid="link-mobile-how">How It Works</button>
+          <button onClick={() => scrollTo('for-brands')} className="text-xl font-medium text-left" data-testid="link-mobile-brands">For Brands</button>
           <button onClick={() => scrollTo('faq')} className="text-xl font-medium text-left" data-testid="link-mobile-faq">FAQ</button>
           <Button onClick={() => scrollTo('services')} className="rounded-full w-full py-6 text-lg mt-4 bg-primary text-white" data-testid="button-mobile-book">
             Book a Consultation
@@ -556,6 +586,160 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 4b. Media kit — for brands */}
+      <section id="for-brands" className="py-28 bg-background relative overflow-hidden">
+        <div className="absolute -top-24 right-[15%] w-80 h-80 rounded-full bg-rose-200/40 blur-3xl animate-blob" aria-hidden="true"></div>
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <h2 className="text-sm font-semibold text-primary uppercase tracking-[0.2em] mb-3 font-sans">Media Kit</h2>
+            <h3 className="text-4xl md:text-5xl font-semibold">
+              Brands, let's create <span className="font-display-italic text-gradient">together</span>
+            </h3>
+            <p className="text-lg text-muted-foreground mt-5">
+              I partner with brands that genuinely help people studying, moving and building a life in Europe.
+            </p>
+          </div>
+
+          {/* Platform stat cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              { label: "Facebook", handle: "Oliwia from Poland", count: 20, suffix: "k+", href: SOCIALS.facebook, icon: <Facebook size={20} />, chip: "bg-[#1877F2]" },
+              { label: "Instagram", handle: "@oliwia_from_poland", count: 14, suffix: "k+", href: SOCIALS.instagram, icon: <Instagram size={20} />, chip: "bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-500" },
+              { label: "YouTube", handle: "Oliwia from Poland", count: 7, suffix: "k+", href: SOCIALS.youtube, icon: <Youtube size={20} />, chip: "bg-[#FF0000]" },
+              { label: "TikTok", handle: "@oliwia.from.poland", count: 2, suffix: "k+", href: SOCIALS.tiktok, icon: <TikTokIcon className="w-5 h-5" />, chip: "bg-black" },
+            ].map((p, i) => (
+              <motion.a
+                key={p.label}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${p.label} — ${p.handle}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: i * 0.08 }}
+                className="group bg-white rounded-3xl border border-border/60 p-6 text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-primary/30 transition-all"
+                data-testid={`card-mediakit-${p.label.toLowerCase()}`}
+              >
+                <span className={`inline-flex w-11 h-11 rounded-2xl ${p.chip} text-white items-center justify-center mb-4 shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform`}>
+                  {p.icon}
+                </span>
+                <div className="font-heading font-semibold text-3xl"><Counter to={p.count} suffix={p.suffix} /></div>
+                <div className="text-xs text-muted-foreground mt-1 leading-tight">{p.handle}</div>
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Audience + formats */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            className="bg-foreground text-background rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden"
+          >
+            <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primary/25 blur-3xl" aria-hidden="true"></div>
+            <div className="grid md:grid-cols-3 gap-10 relative">
+              <div>
+                <h4 className="font-heading font-semibold text-lg mb-3 flex items-center gap-2"><Sparkles size={16} className="text-primary" /> Reach</h4>
+                <p className="text-background/70 text-sm leading-relaxed">
+                  A community of <strong className="text-background">40,000+ followers</strong> across 4 platforms with <strong className="text-background">millions of views</strong> — an international audience of students, couples and young professionals planning their move to Poland and Europe.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-heading font-semibold text-lg mb-3 flex items-center gap-2"><Camera size={16} className="text-primary" /> Content formats</h4>
+                <div className="flex flex-wrap gap-2">
+                  {["Reels & short-form", "YouTube videos", "Stories", "Sponsored posts", "UGC for brands"].map(f => (
+                    <span key={f} className="px-3 py-1.5 rounded-full bg-white/10 text-xs font-medium">{f}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="font-heading font-semibold text-lg mb-3 flex items-center gap-2"><Handshake size={16} className="text-primary" /> Collaboration types</h4>
+                <div className="flex flex-wrap gap-2">
+                  {["Sponsored content", "Brand ambassadorship", "Product reviews", "Campaigns for students & expats"].map(f => (
+                    <span key={f} className="px-3 py-1.5 rounded-full bg-white/10 text-xs font-medium">{f}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="relative mt-10 flex flex-col sm:flex-row items-center gap-4">
+              <Button
+                onClick={() => scrollTo('services')}
+                className="rounded-full px-8 py-6 bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/30 text-base"
+                data-testid="button-mediakit-call"
+              >
+                <Megaphone size={18} className="mr-1" /> Book a free discovery call
+              </Button>
+              <a href="mailto:ask.oliwia.from.poland@gmail.com" className="text-background/70 hover:text-white underline underline-offset-4 text-sm transition-colors">
+                or email ask.oliwia.from.poland@gmail.com
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 4c. Instagram band */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="text-sm font-semibold text-primary uppercase tracking-[0.2em] mb-3 font-sans">Instagram</h2>
+            <h3 className="text-4xl md:text-5xl font-semibold">
+              Follow the <span className="font-display-italic text-gradient">journey</span>
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {[
+              { type: "img" as const, src: oliwiaPhoto, alt: "Oliwia — life in Poland" },
+              { type: "tile" as const, label: "Visa & study tips", icon: GraduationCap, tint: "from-rose-400 to-amber-300" },
+              { type: "img" as const, src: oliwiaAboutPhoto, alt: "Oliwia — behind the scenes" },
+              { type: "tile" as const, label: "Everyday life in Poland", icon: Heart, tint: "from-amber-400 to-rose-400" },
+            ].map((t, i) => (
+              <motion.a
+                key={i}
+                href={SOCIALS.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Oliwia's Instagram profile"
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: i * 0.07 }}
+                className="group relative aspect-square rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all"
+                data-testid={`tile-instagram-${i}`}
+              >
+                {t.type === "img" ? (
+                  <>
+                    <img src={t.src} alt={t.alt} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></div>
+                  </>
+                ) : (
+                  <div className={`w-full h-full bg-gradient-to-br ${t.tint} flex flex-col items-center justify-center text-white p-5 text-center transition-transform duration-500 group-hover:scale-105`}>
+                    <t.icon size={30} className="mb-3 opacity-90" />
+                    <span className="font-heading font-semibold leading-tight">{t.label}</span>
+                  </div>
+                )}
+                <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/85 backdrop-blur flex items-center justify-center text-foreground opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+                  <Instagram size={15} />
+                </span>
+              </motion.a>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <a
+              href={SOCIALS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-500 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              data-testid="button-instagram-follow"
+            >
+              <Instagram size={18} /> @oliwia_from_poland
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* 5. FAQ */}
       <section id="faq" className="py-28 bg-background relative overflow-hidden">
         <div className="absolute top-32 -right-28 w-80 h-80 rounded-full bg-secondary/50 blur-3xl animate-blob" aria-hidden="true"></div>
@@ -687,16 +871,16 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-6">
-            <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-instagram">
+            <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-instagram">
               <Instagram size={18} />
             </a>
-            <a href={SOCIALS.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-facebook">
+            <a href={SOCIALS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-facebook">
               <Facebook size={18} />
             </a>
-            <a href={SOCIALS.youtube} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-youtube">
+            <a href={SOCIALS.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-youtube">
               <Youtube size={18} />
             </a>
-            <a href={SOCIALS.tiktok} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-tiktok">
+            <a href={SOCIALS.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all" data-testid="link-footer-tiktok">
               <TikTokIcon className="w-4 h-4" />
             </a>
           </div>
@@ -715,6 +899,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <BackToTop />
     </div>
   );
 }

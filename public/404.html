@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Oliwia from Poland</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(160deg, #FDF3EF 0%, #FBE9E2 55%, #FDF6EC 100%);
+      color: #2B2118;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+    .blob {
+      position: fixed; border-radius: 50%; filter: blur(70px); z-index: 0; opacity: .5;
+    }
+    .b1 { width: 380px; height: 380px; background: #F5B8A9; top: -90px; right: -60px; }
+    .b2 { width: 300px; height: 300px; background: #F8DCA8; bottom: -70px; left: -50px; }
+    .card { position: relative; z-index: 1; max-width: 560px; }
+    .num {
+      font-family: 'Fraunces', serif; font-style: italic; font-weight: 600;
+      font-size: clamp(6rem, 20vw, 10rem); line-height: 1;
+      background: linear-gradient(95deg, #E85D45, #F0A04B);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 600; margin: 16px 0 10px; }
+    p { color: #7A6A5E; line-height: 1.6; margin-bottom: 28px; }
+    a.btn {
+      display: inline-block; background: #E85D45; color: #fff; text-decoration: none;
+      font-weight: 600; padding: 14px 34px; border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(232, 93, 69, .35); transition: transform .2s, box-shadow .2s;
+    }
+    a.btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(232, 93, 69, .4); }
+    .sig { margin-top: 34px; font-family: 'Fraunces', serif; font-style: italic; color: #C9A392; }
+  </style>
+</head>
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="card">
+    <div class="num">404</div>
+    <h1>Oops, this page wandered off to Poland without us.</h1>
+    <p>The page you're looking for doesn't exist or has moved. Let's get you back on track.</p>
+    <a class="btn" href="/">Take me home</a>
+    <div class="sig">do zobaczenia!</div>
+  </div>
+</body>
+</html>

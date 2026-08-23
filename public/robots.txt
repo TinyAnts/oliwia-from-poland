@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://poland.oliwiakonieczna.info/sitemap.xml
