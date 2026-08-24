@@ -162,7 +162,6 @@ export default function Home() {
   };
 
   const services = [
-    { icon: UserCheck, title: "Promotion Booking Call", desc: "Interested in collaborating or promoting your brand/product on my social media channels? Let's discuss partnership opportunities.", price: "Free 15-minute discovery call" },
     { icon: MessageCircle, title: "Polish Lessons for Foreigners", desc: "Basic-level Polish language lessons. Learn everyday phrases, pronunciation, and cultural context for daily life and communication, rather than just academic study.", promo: true, promoPrices: [{ dur: "30 min", old: "€20", now: "€16.99" }, { dur: "50 min", old: "€35", now: "€19.99" }], price: "30 min – €16.99 | 50 min – €19.99" },
     { icon: CheckCircle2, title: "How to Get Married in Europe", desc: "Informational consultation for international couples exploring marriage in Europe (e.g., Denmark, Poland). We discuss procedures, timelines, and practical considerations — helping you understand your options and next steps.", price: "25 min – €45 | 50 min – €80" },
     { icon: GraduationCap, title: "Apply to Polish/European Universities", desc: "Advisory consultation for students exploring university options in Poland and Europe — including program selection, application requirements, timelines, and strategic preparation tips based on real experience.", price: "25 min – €45 | 50 min – €80" },
@@ -419,7 +418,7 @@ export default function Home() {
                   <div className="text-xs text-muted-foreground leading-tight">Platforms</div>
                 </div>
                 <div className="bg-accent/50 p-5 rounded-3xl border border-accent text-center" data-testid="card-stat-3">
-                  <div className="font-semibold text-3xl text-foreground mb-1 font-heading"><Counter to={10} /></div>
+                  <div className="font-semibold text-3xl text-foreground mb-1 font-heading"><Counter to={9} /></div>
                   <div className="text-xs text-muted-foreground leading-tight">Consultation topics</div>
                 </div>
               </div>
@@ -480,9 +479,9 @@ export default function Home() {
                   transition={{ type: "spring", stiffness: 200, damping: 22, delay: (index % 3) * 0.08 }}
                   className="h-full"
                 >
-                  <Card className="h-full flex flex-col hover:shadow-2xl hover:border-primary/30 transition-all duration-300 border-white/60 bg-white/85 backdrop-blur shadow-sm overflow-hidden group rounded-[2rem] relative">
+                  <Card className={`h-full flex flex-col hover:shadow-2xl transition-all duration-300 backdrop-blur overflow-hidden group rounded-[2rem] relative ${(service as any).promo ? "border-2 border-primary/50 ring-4 ring-primary/15 bg-gradient-to-b from-rose-50/95 to-amber-50/90 shadow-2xl shadow-primary/25 lg:scale-[1.04] lg:hover:scale-[1.06] z-10" : "hover:border-primary/30 border-white/60 bg-white/85 shadow-sm"}`}>
                     {/* Animated gradient top bar */}
-                    <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${tint.bar} scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500`} aria-hidden="true"></div>
+                    <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${tint.bar} ${(service as any).promo ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"} origin-left transition-transform duration-500`} aria-hidden="true"></div>
 
                     <CardContent className="p-8 flex flex-col h-full relative">
                       <div className={`absolute inset-0 bg-gradient-to-br ${tint.wash} to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none`}></div>
@@ -490,12 +489,6 @@ export default function Home() {
                       <span className="absolute top-6 right-7 font-heading font-display-italic text-5xl text-primary/10 group-hover:text-primary/30 group-hover:-rotate-6 transition-all duration-300 select-none" aria-hidden="true">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-
-                      {index === 0 && (
-                        <div className="absolute -top-0.5 left-7 rotate-[-3deg] bg-foreground text-background text-[11px] font-semibold px-3 py-1.5 rounded-b-xl shadow-md flex items-center gap-1">
-                          <Sparkles size={11} className="text-amber-300" /> Free intro
-                        </div>
-                      )}
 
                       {(service as any).promo && (
                         <div className="absolute -top-0.5 left-7 rotate-[-3deg] bg-primary text-white text-[11px] font-bold px-3 py-1.5 rounded-b-xl shadow-md flex items-center gap-1">
@@ -680,13 +673,14 @@ export default function Home() {
               </div>
             </div>
             <div className="relative mt-10 flex flex-col sm:flex-row items-center gap-4">
-              <Button
-                onClick={() => scrollTo('services')}
-                className="rounded-full px-8 py-6 bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/30 text-base"
-                data-testid="button-mediakit-call"
-              >
-                <Megaphone size={18} className="mr-1" /> Book a free discovery call
-              </Button>
+              <a href="mailto:ask.oliwia.from.poland@gmail.com?subject=Collaboration%20inquiry" className="inline-flex">
+                <Button
+                  className="rounded-full px-8 py-6 bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/30 text-base"
+                  data-testid="button-mediakit-call"
+                >
+                  <Megaphone size={18} className="mr-1" /> Contact for collaborations
+                </Button>
+              </a>
               <a href="mailto:ask.oliwia.from.poland@gmail.com" className="text-background/70 hover:text-white underline underline-offset-4 text-sm transition-colors">
                 or email ask.oliwia.from.poland@gmail.com
               </a>
