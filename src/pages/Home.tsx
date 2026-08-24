@@ -36,7 +36,8 @@ import {
 import oliwiaPhoto from "@/assets/images/oliwia-hero.webp";
 import oliwiaAboutPhoto from "@/assets/images/oliwia-about.webp";
 
-const GOOGLE_FORM_URL = "https://forms.gle/uwRDgU335NhpFA9w6";
+const BOOKING_URL = "https://oliwiaqn42.setmore.com";
+const PAYPAL_URL = "https://paypal.me/OliwiaFromPoland";
 
 const SOCIALS = {
   instagram: "https://www.instagram.com/oliwia_from_poland/",
@@ -522,7 +523,7 @@ export default function Home() {
                             <>Price: <span className="text-muted-foreground font-normal whitespace-pre-line">{service.price}</span></>
                           )}
                         </span>
-                        <a href={GOOGLE_FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex">
+                        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-flex">
                           <Button className="rounded-full bg-foreground text-background hover:bg-primary transition-all h-10 pl-5 pr-4 text-sm group/btn" data-testid={`button-book-service-${index}`}>
                             Book Now
                             <ArrowUpRight size={15} className="ml-0.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
@@ -564,8 +565,8 @@ export default function Home() {
 
             {[
               { step: "1", title: "Choose Your Topic", desc: "Browse the consultation services above and pick what you need help with.", icon: MousePointer2 },
-              { step: "2", title: "Fill Out the Booking Form", desc: "Click 'Book Now' and fill in your details, preferred date/time (evenings CET).", icon: Calendar },
-              { step: "3", title: "Get Your 1:1 Session", desc: "I'll confirm your booking and we'll connect for a personal video consultation.", icon: MessageCircle }
+              { step: "2", title: "Pick a Time Slot", desc: "Click 'Book Now' and choose a date and time that suits you on my booking page. I'm available afternoons and evenings, CET.", icon: Calendar },
+              { step: "3", title: "Pay & Meet Online", desc: "Confirm your slot by sending the fee via PayPal (paypal.me/OliwiaFromPoland). I'll then send your Google Meet link and we're set.", icon: MessageCircle }
             ].map((step, index) => (
               <motion.div
                 key={index}
@@ -774,10 +775,10 @@ export default function Home() {
 
           <Accordion type="single" collapsible className="w-full space-y-4">
             {[
-              { q: "How do I book a consultation?", a: "Simply browse the services above, click the 'Book Now' button on the topic you need help with, and fill out the quick Google Form with your details. Once payment is received, I will confirm the booking." },
-              { q: "What timezone are the sessions in?", a: "All sessions are held in the evening CET (Central European Time) timezone." },
+              { q: "How do I book a consultation?", a: "Browse the services above, click 'Book Now' on the topic you need, and pick a free time slot on my booking page. To confirm your session, send the fee via PayPal (paypal.me/OliwiaFromPoland) within 24 hours. Once the payment arrives, I confirm your booking. Unpaid bookings are cancelled." },
+              { q: "What timezone are the sessions in?", a: "My availability is afternoons and evenings, Central European Time. The booking page shows the open slots in your own timezone automatically." },
               { q: "How long is each session?", a: "Sessions typically run for 25-50 minutes depending on chosen service." },
-              { q: "What platform do we use for the call?", a: "We will connect via Google Meet or Zoom. I'll send you a meeting link once your booking is confirmed." },
+              { q: "What platform do we use for the call?", a: "Google Meet. Once your payment is confirmed, I'll send you a calendar invite with the Meet link for your session." },
               { q: "Can I get a refund?", a: "Cancellations made at least 48 hours before the scheduled time are fully refundable. For shorter notice, we can reschedule." },
               { q: "Do you speak Tamil / Hindi?", a: "My husband speaks Tamil so if you want a consultation to be in Tamil you can speak with him instead, otherwise we can have a consultation in English or Polish." },
               { q: "Can I book multiple sessions?", a: "Yes absolutely! If you need ongoing support (like language lessons or comprehensive university application help), we can arrange a package or multiple dates." }
