@@ -163,7 +163,7 @@ export default function Home() {
 
   const services = [
     { icon: UserCheck, title: "Promotion Booking Call", desc: "Interested in collaborating or promoting your brand/product on my social media channels? Let's discuss partnership opportunities.", price: "Free 15-minute discovery call" },
-    { icon: MessageCircle, title: "Polish Lessons for Foreigners", desc: "Basic-level Polish language lessons. Learn everyday phrases, pronunciation, and cultural context for daily life and communication, rather than just academic study.", price: "25 min – €20 | 50 min – €35" },
+    { icon: MessageCircle, title: "Polish Lessons for Foreigners", desc: "Basic-level Polish language lessons. Learn everyday phrases, pronunciation, and cultural context for daily life and communication, rather than just academic study.", promo: true, promoPrices: [{ dur: "30 min", old: "€20", now: "€16.99" }, { dur: "50 min", old: "€35", now: "€19.99" }], price: "30 min – €16.99 | 50 min – €19.99" },
     { icon: CheckCircle2, title: "How to Get Married in Europe", desc: "Informational consultation for international couples exploring marriage in Europe (e.g., Denmark, Poland). We discuss procedures, timelines, and practical considerations — helping you understand your options and next steps.", price: "25 min – €45 | 50 min – €80" },
     { icon: GraduationCap, title: "Apply to Polish/European Universities", desc: "Advisory consultation for students exploring university options in Poland and Europe — including program selection, application requirements, timelines, and strategic preparation tips based on real experience.", price: "25 min – €45 | 50 min – €80" },
     { icon: Star, title: "Social Media Strategy Consultation", desc: "Personalized advisory session focused on content positioning, growth strategy, and audience building — based on my experience growing an international audience of 40,000+ followers across four platforms.", price: "25 min – €40 | 50 min – €70" },
@@ -497,6 +497,12 @@ export default function Home() {
                         </div>
                       )}
 
+                      {(service as any).promo && (
+                        <div className="absolute -top-0.5 left-7 rotate-[-3deg] bg-primary text-white text-[11px] font-bold px-3 py-1.5 rounded-b-xl shadow-md flex items-center gap-1">
+                          <Sparkles size={11} className="text-amber-200" /> PROMO
+                        </div>
+                      )}
+
                       <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${tint.tile} flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}>
                         <service.icon size={26} strokeWidth={1.5} />
                         <span className="absolute -top-1.5 -right-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-primary" aria-hidden="true">
@@ -510,7 +516,18 @@ export default function Home() {
                       </p>
                       <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50 gap-4 relative">
                         <span className="font-semibold text-sm leading-tight max-w-[60%]">
-                          Price: <span className="text-muted-foreground font-normal whitespace-pre-line">{service.price}</span>
+                          {(service as any).promoPrices ? (
+                            <span className="flex flex-col gap-1">
+                              {(service as any).promoPrices.map((p: { dur: string; old: string; now: string }) => (
+                                <span key={p.dur} className="font-normal">
+                                  {p.dur} – <s className="text-muted-foreground/60">{p.old}</s>{" "}
+                                  <strong className="text-primary font-bold">{p.now}</strong>
+                                </span>
+                              ))}
+                            </span>
+                          ) : (
+                            <>Price: <span className="text-muted-foreground font-normal whitespace-pre-line">{service.price}</span></>
+                          )}
                         </span>
                         <a href={GOOGLE_FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex">
                           <Button className="rounded-full bg-foreground text-background hover:bg-primary transition-all h-10 pl-5 pr-4 text-sm group/btn" data-testid={`button-book-service-${index}`}>
