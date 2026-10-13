@@ -164,15 +164,15 @@ export default function Home() {
   };
 
   const services = [
-    { icon: MessageCircle, title: "Polish Lessons for Foreigners", desc: "Basic-level Polish language lessons. Learn everyday phrases, pronunciation, and cultural context for daily life and communication, rather than just academic study.", promo: true, promoPrices: [{ dur: "30 min", old: "€20", now: "€16.99" }, { dur: "50 min", old: "€35", now: "€19.99" }], price: "30 min – €16.99 | 50 min – €19.99" },
-    { icon: CheckCircle2, title: "How to Get Married in Europe", desc: "Informational consultation for international couples exploring marriage in Europe (e.g., Denmark, Poland). We discuss procedures, timelines, and practical considerations — helping you understand your options and next steps.", price: "25 min – €45 | 50 min – €80" },
-    { icon: GraduationCap, title: "Apply to Polish/European Universities", desc: "Advisory consultation for students exploring university options in Poland and Europe — including program selection, application requirements, timelines, and strategic preparation tips based on real experience.", price: "25 min – €45 | 50 min – €80" },
-    { icon: Star, title: "Social Media Strategy Consultation", desc: "Personalized advisory session focused on content positioning, growth strategy, and audience building — based on my experience growing an international audience of 40,000+ followers across four platforms.", price: "25 min – €40 | 50 min – €70" },
-    { icon: GraduationCap, title: "Study in Poland Advice", desc: "Advisory session for international students considering Poland — covering student life, cost of living, accommodation realities, and understanding the practical aspects of studying and integrating locally.", price: "25 min – €45 | 50 min – €80" },
-    { icon: Plane, title: "Poland Visa Process Overview", desc: "Informational consultation explaining different visa categories, general requirements, timelines, and common challenges — helping you understand the process and prepare independently.", price: "25 min – €45 | 50 min – €80" },
-    { icon: Briefcase, title: "Job in Poland Advice", desc: "Tips on finding a job in Poland as a foreigner — job portals, CV tips, work permits, and what employers expect.", price: "25 min – €40 | 50 min – €70" },
-    { icon: MousePointer2, title: "UX/UI Advice for Beginners", desc: "Introductory advice on getting started in UX/UI design — tools, portfolio tips, learning resources, and career paths.", price: "25 min – €40 | 50 min – €70" },
-    { icon: MessageCircle, title: "Ask Me Anything", desc: "A casual, open session where you can ask me anything about life in Poland, my journey, content creation, or anything else on your mind.", price: "25 min – €30" },
+    { icon: MessageCircle, title: "Polish Lessons for Foreigners", desc: "Beginner Polish for real life. We practise everyday phrases, pronunciation and the little cultural things that help you get by, not grammar for exams.", promo: true, promoPrices: [{ dur: "30 min", old: "€20", now: "€16.99" }, { dur: "50 min", old: "€35", now: "€19.99" }], price: "30 min: €16.99 | 50 min: €19.99" },
+    { icon: CheckCircle2, title: "How to Get Married in Europe", desc: "For international couples thinking about getting married in Europe, for example in Denmark or Poland. I explain how it usually works, how long it takes and what to watch out for, so you know your options and what to do next.", price: "25 min: €45 | 50 min: €80" },
+    { icon: GraduationCap, title: "Apply to Polish/European Universities", desc: "Thinking about uni in Poland or somewhere else in Europe? We go through programmes, what you need to apply, deadlines, and the tips I wish someone had given me.", price: "25 min: €45 | 50 min: €80" },
+    { icon: Star, title: "Social Media Strategy Consultation", desc: "Let's talk about your content: what to post, how to grow and how to build a real audience. I'll share what worked for me while growing to 40,000+ followers across four platforms.", price: "25 min: €40 | 50 min: €70" },
+    { icon: GraduationCap, title: "Study in Poland Advice", desc: "Wondering what studying in Poland is really like? I'll tell you honestly about student life, costs, finding a place to live and settling in.", price: "25 min: €45 | 50 min: €80" },
+    { icon: Plane, title: "Poland Visa Process Overview", desc: "I walk you through the main visa types, what they usually need, how long things take and where people often get stuck, so you can prepare on your own.", price: "25 min: €45 | 50 min: €80" },
+    { icon: Briefcase, title: "Job in Poland Advice", desc: "How to find work in Poland as a foreigner: where to look, how to shape your CV, work permits, and what employers here expect.", price: "25 min: €40 | 50 min: €70" },
+    { icon: MousePointer2, title: "UX/UI Advice for Beginners", desc: "New to UX/UI design? I'll help you get started with the right tools, portfolio tips, good places to learn and possible career paths.", price: "25 min: €40 | 50 min: €70" },
+    { icon: MessageCircle, title: "Ask Me Anything", desc: "A relaxed chat where you can ask me anything: life in Poland, my story, making content, or whatever is on your mind.", price: "25 min: €30" },
   ];
 
   const cardTints = [
@@ -258,7 +258,7 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 border border-primary/20 text-primary font-medium text-sm mb-8 shadow-sm backdrop-blur"
               >
                 <Heart size={14} className="fill-primary text-primary" />
-                Creator • Consultant • Your guide to Poland
+                Creator and consultant, living in Poland
               </motion.div>
 
               <h1 className="text-5xl md:text-6xl lg:text-[5.2rem] font-semibold leading-[1.02] mb-8 tracking-tight">
@@ -274,7 +274,7 @@ export default function Home() {
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-lg leading-relaxed">
-                From university admissions to visas to building a whole new life — I've helped thousands navigate it. Let's plan yours together.
+                Uni applications, visas, finding your feet in a new country: I've been through all of it, and I love helping others with it. Let's plan your move together.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -313,12 +313,12 @@ export default function Home() {
                   <Youtube size={16} />
                 </div>
                 <span>
-                  A community of <strong className="text-foreground">40,000+ followers</strong> · millions of views across 4 platforms
+                  Come say hi! <strong className="text-foreground">40,000+ followers</strong> and millions of views across 4 platforms
                 </span>
               </motion.div>
             </motion.div>
 
-            {/* Hero photo — editorial arch */}
+            {/* Hero photo, editorial arch */}
             <motion.div
               className="w-full md:w-[45%] relative"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -401,10 +401,10 @@ export default function Home() {
                 Creator, consultant &<br /><span className="font-display-italic text-gradient">your friend in Poland</span>
               </h3>
               <p className="text-lg text-muted-foreground mb-5 leading-relaxed">
-                I'm Oliwia — a Poland-based creator sharing real-life insights about studying, living, and navigating life in Europe with a growing international community across Instagram, Facebook, TikTok and YouTube.
+                Hi, I'm Oliwia! I live in Poland and make videos about studying, living and finding your way in Europe, for a lovely international community on Instagram, Facebook, TikTok and YouTube.
               </p>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                If you're planning to move to Poland — for university, love, or a fresh start — I offer 1:1 advisory consultations where I guide you through your options, explain processes, and help you plan your next steps confidently.
+                Planning to move here for uni, for love or for a fresh start? Book a 1:1 call with me. I'll explain how things work, go through your options with you and help you figure out what to do next.
               </p>
 
               {/* Animated stats */}
@@ -466,7 +466,7 @@ export default function Home() {
               </span>
             </h3>
             <p className="text-lg text-muted-foreground mt-6">
-              All sessions are held in the evening CET timezone. Choose the topic that fits your needs and book directly through the form.
+              Pick the topic you need help with and book a time on my booking page. I'm free in the afternoons and evenings, Central European Time.
             </p>
           </div>
 
@@ -516,14 +516,18 @@ export default function Home() {
                           {(service as any).promoPrices ? (
                             <span className="flex flex-col gap-1">
                               {(service as any).promoPrices.map((p: { dur: string; old: string; now: string }) => (
-                                <span key={p.dur} className="font-normal">
-                                  {p.dur} – <s className="text-muted-foreground/60">{p.old}</s>{" "}
+                                <span key={p.dur} className="font-normal whitespace-nowrap">
+                                  {p.dur}: <s className="text-muted-foreground/60">{p.old}</s>{" "}
                                   <strong className="text-primary font-bold">{p.now}</strong>
                                 </span>
                               ))}
                             </span>
                           ) : (
-                            <>Price: <span className="text-muted-foreground font-normal whitespace-pre-line">{service.price}</span></>
+                            <span className="flex flex-col gap-1">
+                              {service.price.split(" | ").map((line) => (
+                                <span key={line} className="font-normal whitespace-nowrap">{line}</span>
+                              ))}
+                            </span>
                           )}
                         </span>
                         <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-flex">
@@ -567,9 +571,9 @@ export default function Home() {
             </svg>
 
             {[
-              { step: "1", title: "Choose Your Topic", desc: "Browse the consultation services above and pick what you need help with.", icon: MousePointer2 },
-              { step: "2", title: "Pick a Time Slot", desc: "Click 'Book Now' and choose a date and time that suits you on my booking page. I'm available afternoons and evenings, CET.", icon: Calendar },
-              { step: "3", title: "Pay & Meet Online", desc: "Confirm your slot by sending the fee via PayPal (paypal.me/OliwiaFromPoland). I'll then send your Google Meet link and we're set.", icon: MessageCircle }
+              { step: "1", title: "Choose Your Topic", desc: "Have a look at the topics above and pick the one you need help with.", icon: MousePointer2 },
+              { step: "2", title: "Pick a Time Slot", desc: "Click 'Book Now' and choose a day and time that works for you. I'm around in the afternoons and evenings, CET.", icon: Calendar },
+              { step: "3", title: "Pay & Meet Online", desc: "Send the fee through PayPal (paypal.me/OliwiaFromPoland) within 24 hours to keep your slot. Then I'll send you a Google Meet link and we're all set.", icon: MessageCircle }
             ].map((step, index) => (
               <motion.div
                 key={index}
@@ -603,7 +607,7 @@ export default function Home() {
       {/* 4a. Free Thirukkural PDF (a small project to test demand) */}
       <ThirukkuralSection />
 
-      {/* 4b. Media kit — for brands */}
+      {/* 4b. Media kit, for brands */}
       <section id="for-brands" className="py-28 bg-background relative overflow-hidden">
         <div className="absolute -top-24 right-[15%] w-80 h-80 rounded-full bg-rose-200/40 blur-3xl animate-blob" aria-hidden="true"></div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -613,7 +617,7 @@ export default function Home() {
               Brands, let's create <span className="font-display-italic text-gradient">together</span>
             </h3>
             <p className="text-lg text-muted-foreground mt-5">
-              I partner with brands that genuinely help people studying, moving and building a life in Europe.
+              I love working with brands that make life easier for people studying, moving or settling down in Europe.
             </p>
           </div>
 
@@ -630,7 +634,7 @@ export default function Home() {
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${p.label} — ${p.handle}`}
+                aria-label={`${p.label}: ${p.handle}`}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
@@ -659,7 +663,7 @@ export default function Home() {
               <div>
                 <h4 className="font-heading font-semibold text-lg mb-3 flex items-center gap-2"><Sparkles size={16} className="text-primary" /> Reach</h4>
                 <p className="text-background/70 text-sm leading-relaxed">
-                  A community of <strong className="text-background">40,000+ followers</strong> across 4 platforms with <strong className="text-background">millions of views</strong> — an international audience of students, couples and young professionals planning their move to Poland and Europe.
+                  <strong className="text-background">40,000+ followers</strong> across 4 platforms and <strong className="text-background">millions of views</strong>. It's an international crowd of students, couples and young professionals planning a move to Poland or elsewhere in Europe.
                 </p>
               </div>
               <div>
@@ -708,9 +712,9 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
-              { type: "img" as const, src: oliwiaPhoto, alt: "Oliwia — life in Poland" },
+              { type: "img" as const, src: oliwiaPhoto, alt: "Oliwia, life in Poland" },
               { type: "tile" as const, label: "Visa & study tips", icon: GraduationCap, tint: "from-rose-400 to-amber-300" },
-              { type: "img" as const, src: oliwiaAboutPhoto, alt: "Oliwia — behind the scenes" },
+              { type: "img" as const, src: oliwiaAboutPhoto, alt: "Oliwia, behind the scenes" },
               { type: "tile" as const, label: "Everyday life in Poland", icon: Heart, tint: "from-amber-400 to-rose-400" },
             ].map((t, i) => (
               <motion.a
@@ -781,13 +785,13 @@ export default function Home() {
 
           <Accordion type="single" collapsible className="w-full space-y-4">
             {[
-              { q: "How do I book a consultation?", a: "Browse the services above, click 'Book Now' on the topic you need, and pick a free time slot on my booking page. To confirm your session, send the fee via PayPal (paypal.me/OliwiaFromPoland) within 24 hours. Once the payment arrives, I confirm your booking. Unpaid bookings are cancelled." },
-              { q: "What timezone are the sessions in?", a: "My availability is afternoons and evenings, Central European Time. The booking page shows the open slots in your own timezone automatically." },
-              { q: "How long is each session?", a: "Sessions typically run for 25-50 minutes depending on chosen service." },
-              { q: "What platform do we use for the call?", a: "Google Meet. Once your payment is confirmed, I'll send you a calendar invite with the Meet link for your session." },
-              { q: "Can I get a refund?", a: "Cancellations made at least 48 hours before the scheduled time are fully refundable. For shorter notice, we can reschedule." },
-              { q: "Do you speak Tamil / Hindi?", a: "My husband speaks Tamil so if you want a consultation to be in Tamil you can speak with him instead, otherwise we can have a consultation in English or Polish." },
-              { q: "Can I book multiple sessions?", a: "Yes absolutely! If you need ongoing support (like language lessons or comprehensive university application help), we can arrange a package or multiple dates." }
+              { q: "How do I book a consultation?", a: "Pick a topic above, click 'Book Now' and choose a free slot on my booking page. Then send the fee through PayPal (paypal.me/OliwiaFromPoland) within 24 hours. As soon as it arrives, I'll confirm your booking. If no payment comes in, I'll have to cancel the slot." },
+              { q: "What timezone are the sessions in?", a: "I'm available in the afternoons and evenings, Central European Time. No need to do the maths: the booking page shows free slots in your own timezone." },
+              { q: "How long is each session?", a: "Between 25 and 50 minutes, depending on the service you pick." },
+              { q: "What platform do we use for the call?", a: "Google Meet. Once your payment is confirmed, I'll send you a calendar invite with the Meet link." },
+              { q: "Can I get a refund?", a: "Yes. If you cancel at least 48 hours before your session, you get a full refund. If it's closer than that, we can move it to another time instead." },
+              { q: "Do you speak Tamil / Hindi?", a: "My husband speaks Tamil, so if you'd like your consultation in Tamil, you can talk to him instead. Otherwise we can talk in English or Polish." },
+              { q: "Can I book multiple sessions?", a: "Of course! If you need help over a longer time, like regular Polish lessons or support with a whole university application, we can set up a package or book a few dates." }
             ].map((faq, index) => (
               <motion.div
                 key={index}
@@ -835,7 +839,7 @@ export default function Home() {
                 Ready to start your <span className="font-display-italic text-gradient">Polish chapter?</span>
               </h3>
               <p className="text-background/70 text-lg mb-8 max-w-xl">
-                Pick a topic, book your session, and let's plan your move together — one honest conversation at a time.
+                Pick a topic, grab a time that suits you, and we'll work out your next steps together.
               </p>
               <Button
                 size="lg"
@@ -864,11 +868,11 @@ export default function Home() {
       {/* 7. Disclaimer */}
       <section className="py-12 bg-secondary/10 border-t border-border/50">
         <div className="container mx-auto px-6 md:px-12 max-w-4xl text-center">
-          <h4 className="font-semibold mb-3 text-foreground font-heading">Important Information</h4>
+          <h4 className="font-semibold mb-3 text-foreground font-heading">Good to know</h4>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            All consultations are advisory and informational in nature. I provide guidance based on personal experience and general knowledge. I do not prepare or submit applications, complete official documents, or provide legal or immigration representation.
+            My consultations are advice and information, based on my own experience and general knowledge. I don't prepare or submit applications, fill in official documents, or act as a legal or immigration representative.
             <br className="mb-2" />
-            Clients are responsible for independently verifying requirements with official institutions and authorities.
+            Please always double check the requirements with the official institutions and authorities yourself.
           </p>
         </div>
       </section>
