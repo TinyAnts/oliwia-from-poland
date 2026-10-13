@@ -107,6 +107,38 @@ These are the owner's standing preferences. Breaking them means redoing work.
 6. **Forms and interactive elements must stay accessible** (labels, focus states,
    reduced-motion fallbacks for animations).
 
+## Free Thirukkural PDF and the hidden download counter
+
+A section with id `thirukkural` (between How It Works and For Brands, plus a
+"Free PDF" nav link) offers a free 13-page booklet of ten Thirukkural couplets in
+Tamil, Polish and English. It is a demand test: the copy asks readers to download
+and share it, and to support on Ko-fi only if they want to, possibly toward a book.
+
+- Component: `src/components/ThirukkuralSection.tsx` (copy, Ko-fi link, counter).
+- PDF: `public/downloads/thirukkural-10-couplets-oliwia-from-poland.pdf`.
+  To replace it, overwrite that file with the same name.
+- Support link: `https://ko-fi.com/oliwiafrompoland` (Ko-fi, not Buy Me a Coffee).
+- Short link for social bios: `/thirukkural` redirects to `/#thirukkural`
+  (`public/_redirects`).
+
+**Counter.** Each click on a download link sends a POST to `/api/downloads`
+(`functions/api/downloads.js`, a Cloudflare Pages Function). The total shows as a
+faint 10px number in the bottom-left corner of the footer (white at 9% opacity).
+Visiting `/api/downloads` directly shows the number as `{"count": N}`.
+
+- Storage is a free **D1 database** bound to the Pages project as
+  `DOWNLOADS_DB` (Settings -> Bindings, Production). The table creates itself.
+  Counts are stored per day in table `downloads (item, day, n)`, so the D1
+  console can show demand over time:
+  `SELECT day, n FROM downloads ORDER BY day;`
+- Without the binding, the API answers 503, the number is simply hidden, and the
+  PDF still downloads (the link points straight at the static file).
+- The same visitor is counted at most once per 30 seconds; requests from other
+  websites are refused. It counts clicks on this site, not people who get the
+  PDF some other way (for example a forwarded file).
+- The number is faint, not secret: anyone who selects the footer text can see it.
+  Never seed or inflate it.
+
 ## How deployment works
 
 Every site follows the same path:

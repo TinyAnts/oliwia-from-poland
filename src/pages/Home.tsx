@@ -32,6 +32,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import ThirukkuralSection, { DownloadCounter } from "@/components/ThirukkuralSection";
 
 import oliwiaPhoto from "@/assets/images/oliwia-hero.webp";
 import oliwiaAboutPhoto from "@/assets/images/oliwia-about.webp";
@@ -203,10 +204,11 @@ export default function Home() {
             Oliwia <span className="text-primary font-display-italic">from Poland</span>
           </div>
 
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 whitespace-nowrap">
             <button onClick={() => scrollTo('about')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-about">About</button>
             <button onClick={() => scrollTo('services')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-services">Services</button>
             <button onClick={() => scrollTo('how-it-works')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-how">How It Works</button>
+            <button onClick={() => scrollTo('thirukkural')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-free-pdf">Free PDF</button>
             <button onClick={() => scrollTo('for-brands')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-brands">For Brands</button>
             <button onClick={() => scrollTo('faq')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-faq">FAQ</button>
             <Button onClick={() => scrollTo('services')} className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20" data-testid="button-nav-book">
@@ -214,7 +216,7 @@ export default function Home() {
             </Button>
           </div>
 
-          <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-testid="button-mobile-menu">
+          <button className="lg:hidden" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-testid="button-mobile-menu">
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -222,10 +224,11 @@ export default function Home() {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background pt-24 px-6 flex flex-col space-y-6 md:hidden">
+        <div className="fixed inset-0 z-40 bg-background pt-24 px-6 flex flex-col space-y-6 lg:hidden">
           <button onClick={() => scrollTo('about')} className="text-xl font-medium text-left" data-testid="link-mobile-about">About</button>
           <button onClick={() => scrollTo('services')} className="text-xl font-medium text-left" data-testid="link-mobile-services">Services</button>
           <button onClick={() => scrollTo('how-it-works')} className="text-xl font-medium text-left" data-testid="link-mobile-how">How It Works</button>
+          <button onClick={() => scrollTo('thirukkural')} className="text-xl font-medium text-left" data-testid="link-mobile-free-pdf">Free Thirukkural PDF</button>
           <button onClick={() => scrollTo('for-brands')} className="text-xl font-medium text-left" data-testid="link-mobile-brands">For Brands</button>
           <button onClick={() => scrollTo('faq')} className="text-xl font-medium text-left" data-testid="link-mobile-faq">FAQ</button>
           <Button onClick={() => scrollTo('services')} className="rounded-full w-full py-6 text-lg mt-4 bg-primary text-white" data-testid="button-mobile-book">
@@ -597,6 +600,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 4a. Free Thirukkural PDF (a small project to test demand) */}
+      <ThirukkuralSection />
+
       {/* 4b. Media kit — for brands */}
       <section id="for-brands" className="py-28 bg-background relative overflow-hidden">
         <div className="absolute -top-24 right-[15%] w-80 h-80 rounded-full bg-rose-200/40 blur-3xl animate-blob" aria-hidden="true"></div>
@@ -910,6 +916,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* Hidden download counter for Oliwia: tiny and barely visible on purpose */}
+        <DownloadCounter className="absolute bottom-2 left-3 text-[10px] leading-none tabular-nums text-white/[0.09] select-all" />
       </footer>
 
       <BackToTop />
