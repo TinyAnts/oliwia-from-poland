@@ -121,23 +121,23 @@ and share it, and to support on Ko-fi only if they want to, possibly toward a bo
 - Short link for social bios: `/thirukkural` redirects to `/#thirukkural`
   (`public/_redirects`).
 
-**Counter.** Each click on a download link sends a POST to `/api/downloads`
-(`functions/api/downloads.js`, a Cloudflare Pages Function). The total shows as a
-faint 10px number in the bottom-left corner of the footer (white at 9% opacity).
-Visiting `/api/downloads` directly shows the number as `{"count": N}`.
+**Counter.** Only clicks on the "Download the free PDF" button are counted (the
+cover image is not a link). Each click calls the free, no-account counter service
+Abacus: `https://abacus.jasoncameron.dev/hit/poland-oliwiakonieczna-info/thirukkural-pdf-button`.
+A page visit counts at most once, so double clicks are not counted twice. Nothing
+has to be set up in Cloudflare.
 
-- Storage is a free **D1 database** bound to the Pages project as
-  `DOWNLOADS_DB` (Settings -> Bindings, Production). The table creates itself.
-  Counts are stored per day in table `downloads (item, day, n)`, so the D1
-  console can show demand over time:
-  `SELECT day, n FROM downloads ORDER BY day;`
-- Without the binding, the API answers 503, the number is simply hidden, and the
-  PDF still downloads (the link points straight at the static file).
-- The same visitor is counted at most once per 30 seconds; requests from other
-  websites are refused. It counts clicks on this site, not people who get the
-  PDF some other way (for example a forwarded file).
-- The number is faint, not secret: anyone who selects the footer text can see it.
-  Never seed or inflate it.
+- The total shows as a faint 10px number in the bottom-left corner of the footer
+  (white at 9% opacity). Highlight the corner to read it.
+- To check the number directly, open
+  `https://abacus.jasoncameron.dev/get/poland-oliwiakonieczna-info/thirukkural-pdf-button`.
+  It returns `{"value": N}`. Before the first click it says "Key not found".
+- If the service is down, the number is hidden and the PDF still downloads.
+- Limits: Abacus is a free hobby service run by one developer, so it could change
+  or disappear. A counter that gets no clicks for about 6 months is deleted. Anyone
+  who finds the URL could add fake clicks, so treat the number as a rough signal.
+  The number is faint, not secret. Never seed or inflate it.
+- The old Cloudflare D1 counter (`functions/api/downloads.js`) was removed.
 
 ## How deployment works
 

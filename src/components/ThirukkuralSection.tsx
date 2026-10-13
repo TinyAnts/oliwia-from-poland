@@ -8,21 +8,30 @@ import pageImg from "@/assets/images/thirukkural-page.webp";
 
 export const KOFI_URL = "https://ko-fi.com/oliwiafrompoland";
 export const THIRUKKURAL_PDF = "/downloads/thirukkural-10-couplets-oliwia-from-poland.pdf";
-const COUNTER_API = "/api/downloads";
+/* Free counter service (no account, no setup): https://abacus.jasoncameron.dev
+   /hit adds one and returns the new total, /get only reads it.
+   Note: a counter that gets no clicks for about 6 months is deleted by the service. */
+const COUNTER_BASE = "https://abacus.jasoncameron.dev";
+const COUNTER_PATH = "poland-oliwiakonieczna-info/thirukkural-pdf-button";
 const COUNT_EVENT = "thirukkural-downloads";
+
+let countedThisVisit = false;
 
 const TRANSLATED = 10;
 const TOTAL_KURALS = 1330;
 
-/* Tell the server about one download. The PDF link works on its own,
-   so if this fails the visitor still gets the file. */
+/* Count one click on the download button (once per page visit, so double
+   clicks are not counted twice). The PDF link works on its own, so if the
+   counter service is down the visitor still gets the file. */
 function countDownload() {
+  if (countedThisVisit) return;
+  countedThisVisit = true;
   try {
-    fetch(COUNTER_API, { method: "POST", keepalive: true })
+    fetch(`${COUNTER_BASE}/hit/${COUNTER_PATH}`, { keepalive: true })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
-        if (d && typeof d.count === "number") {
-          window.dispatchEvent(new CustomEvent(COUNT_EVENT, { detail: d.count }));
+        if (d && typeof d.value === "number") {
+          window.dispatchEvent(new CustomEvent(COUNT_EVENT, { detail: d.value }));
         }
       })
       .catch(() => {});
@@ -32,16 +41,16 @@ function countDownload() {
 }
 
 /* The faint number in the footer corner. Hidden completely if the counter
-   is not set up yet, so visitors never see an error. */
+   service cannot be reached, so visitors never see an error. */
 export function DownloadCounter({ className = "" }: { className?: string }) {
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
     let alive = true;
-    fetch(COUNTER_API, { cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : null))
+    fetch(`${COUNTER_BASE}/get/${COUNTER_PATH}`, { cache: "no-store" })
+      .then((r) => (r.status === 404 ? { value: 0 } : r.ok ? r.json() : null))
       .then((d) => {
-        if (alive && d && typeof d.count === "number") setCount(d.count);
+        if (alive && d && typeof d.value === "number") setCount(d.value);
       })
       .catch(() => {});
     const onCount = (e: Event) => setCount((e as CustomEvent<number>).detail);
@@ -139,21 +148,14 @@ export default function ThirukkuralSection() {
                 loading="lazy"
                 className="absolute inset-0 w-full h-full rounded-xl shadow-xl rotate-[7deg] translate-x-14 sm:translate-x-20 translate-y-3 border border-black/5"
               />
-              <a
-                href={THIRUKKURAL_PDF}
-                download
-                onClick={onDownload}
-                className="absolute inset-0 block rounded-xl shadow-2xl -rotate-[3deg] hover:-rotate-[1deg] hover:-translate-y-1 transition-transform duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/40"
-                aria-label="Download the free Thirukkural PDF"
-                data-testid="link-thirukkural-cover"
-              >
+              <div className="absolute inset-0 rounded-xl shadow-2xl -rotate-[3deg]">
                 <img
                   src={coverImg}
                   alt="Cover of the booklet: Thirukkural, ten selected couplets in Tamil, Polish and English"
                   loading="lazy"
                   className="w-full h-full rounded-xl border border-black/5"
                 />
-              </a>
+              </div>
 
               <div className="absolute -left-6 sm:-left-10 top-10 bg-white rounded-2xl shadow-xl px-4 py-2.5 text-sm font-semibold flex items-center gap-2 animate-float z-20">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true"></span>

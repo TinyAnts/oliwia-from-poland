@@ -2,7 +2,7 @@
 
 Landing page for the "Oliwia from Poland" creator brand (Instagram, Facebook, TikTok, YouTube) with 1:1 consultation booking.
 
-Built with Vite + React + Tailwind CSS v4. Static pages, plus one small Cloudflare Pages Function for the PDF download counter (`functions/api/downloads.js`).
+Built with Vite + React + Tailwind CSS v4. Fully static, no server needed. The PDF download counter uses a free external counter service (see HANDOFF.md).
 
 ## Develop
 
