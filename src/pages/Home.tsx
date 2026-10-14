@@ -970,7 +970,7 @@ export default function Home() {
           </div>
         </div>
         {/* Hidden download counter for Oliwia: tiny and barely visible on purpose */}
-        <DownloadCounter className="absolute bottom-2 left-3 text-[10px] leading-none tabular-nums text-white/[0.09] select-all" />
+        <DownloadCounter className="absolute bottom-2.5 left-3.5 text-xs leading-none tabular-nums text-white/[0.2] select-all" />
       </footer>
 
       <BackToTop />
