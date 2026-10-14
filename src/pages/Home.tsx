@@ -316,11 +316,11 @@ export default function Home() {
                 Uni applications, visas, finding your feet in a new country: I've been through all of it, and I love helping others with it. Let's plan your move together.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-3 w-full sm:w-auto">
                 <Button
                   size="lg"
                   onClick={() => scrollTo('services')}
-                  className="rounded-full px-8 py-6 text-lg bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25 group"
+                  className="rounded-full px-6 py-6 text-lg bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25 group"
                   data-testid="button-hero-book"
                 >
                   Book a Consultation
@@ -330,10 +330,20 @@ export default function Home() {
                   size="lg"
                   variant="outline"
                   onClick={() => scrollTo('about')}
-                  className="rounded-full px-8 py-6 text-lg bg-white/50 border-primary/20 hover:bg-white/80"
+                  className="rounded-full px-6 py-6 text-lg bg-white/50 border-primary/20 hover:bg-white/80"
                   data-testid="button-hero-about"
                 >
                   Meet Oliwia
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => scrollTo('thirukkural')}
+                  className="relative rounded-full px-6 py-6 text-lg bg-amber-50 border-2 border-primary/40 hover:bg-white hover:border-primary [&_svg]:size-5"
+                  data-testid="button-hero-free-pdf"
+                >
+                  <Gift className="text-primary" aria-hidden="true" /> Free PDF
+                  <span className="absolute -top-2.5 -right-1 rounded-full bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 shadow" aria-hidden="true">New</span>
                 </Button>
               </div>
 
