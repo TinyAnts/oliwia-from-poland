@@ -117,7 +117,7 @@ export default function ThirukkuralSection() {
     <section
       id="thirukkural"
       aria-labelledby="thirukkural-title"
-      className="py-28 bg-[#f4ede2] relative overflow-hidden scroll-mt-16"
+      className="py-28 bg-[#f4ede2] relative overflow-hidden"
     >
       {/* Soft background shapes, echoing the booklet colours */}
       <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-amber-200/40 blur-3xl animate-blob-slow" aria-hidden="true"></div>

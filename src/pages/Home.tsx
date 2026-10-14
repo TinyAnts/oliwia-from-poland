@@ -22,7 +22,9 @@ import {
   Video,
   Camera,
   Megaphone,
-  Handshake
+  Handshake,
+  Gift,
+  ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -198,9 +200,26 @@ export default function Home() {
       />
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'}`}>
+      <nav className="fixed top-0 left-0 right-0 z-50">
+        {/* Announcement bar: free Thirukkural PDF */}
+        <button
+          onClick={() => scrollTo('thirukkural')}
+          className="group w-full bg-foreground text-background text-xs sm:text-sm py-2 px-4 flex items-center justify-center gap-2 hover:bg-foreground/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+          data-testid="button-announcement-free-pdf"
+        >
+          <Gift size={15} className="text-primary shrink-0" aria-hidden="true" />
+          <span>
+            <strong className="font-semibold">New:</strong>{" "}
+            <span className="sm:hidden">10 free Thirukkural couplets</span>
+            <span className="hidden sm:inline">10 Thirukkural couplets in Tamil, Polish and English, free to download now</span>
+          </span>
+          <span className="inline-flex items-center font-semibold text-primary whitespace-nowrap">
+            <span className="max-[369px]:hidden">Get the PDF</span><span className="min-[370px]:hidden">Get it</span> <ChevronRight size={15} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </span>
+        </button>
+        <div className={`transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'}`}>
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-          <div className="font-heading font-semibold text-xl tracking-tight cursor-pointer" onClick={() => scrollTo('hero')}>
+          <div className="font-heading font-semibold text-lg sm:text-xl tracking-tight cursor-pointer whitespace-nowrap" onClick={() => scrollTo('hero')}>
             Oliwia <span className="text-primary font-display-italic">from Poland</span>
           </div>
 
@@ -208,23 +227,43 @@ export default function Home() {
             <button onClick={() => scrollTo('about')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-about">About</button>
             <button onClick={() => scrollTo('services')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-services">Services</button>
             <button onClick={() => scrollTo('how-it-works')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-how">How It Works</button>
-            <button onClick={() => scrollTo('thirukkural')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-free-pdf">Free PDF</button>
             <button onClick={() => scrollTo('for-brands')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-brands">For Brands</button>
             <button onClick={() => scrollTo('faq')} className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-faq">FAQ</button>
+            <button
+              onClick={() => scrollTo('thirukkural')}
+              className="relative inline-flex items-center gap-1.5 rounded-full border-2 border-primary/40 bg-amber-50 px-4 py-1.5 text-sm font-semibold text-foreground hover:border-primary hover:bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              data-testid="button-nav-free-pdf"
+            >
+              <Gift size={15} className="text-primary" aria-hidden="true" /> Free PDF
+              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping motion-reduce:animate-none"></span>
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+              </span>
+            </button>
             <Button onClick={() => scrollTo('services')} className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20" data-testid="button-nav-book">
               Book Now
             </Button>
           </div>
 
+          <div className="flex items-center gap-3 lg:hidden">
+          <button
+            onClick={() => scrollTo('thirukkural')}
+            className="hidden min-[370px]:inline-flex items-center gap-1 rounded-full border-2 border-primary/40 bg-amber-50 px-3 py-1 text-xs font-semibold whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            data-testid="button-mobile-free-pdf"
+          >
+            <Gift size={13} className="text-primary" aria-hidden="true" /> Free PDF
+          </button>
           <button className="lg:hidden" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-testid="button-mobile-menu">
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+          </div>
+        </div>
         </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background pt-24 px-6 flex flex-col space-y-6 lg:hidden">
+        <div className="fixed inset-0 z-40 bg-background pt-32 px-6 flex flex-col space-y-6 lg:hidden">
           <button onClick={() => scrollTo('about')} className="text-xl font-medium text-left" data-testid="link-mobile-about">About</button>
           <button onClick={() => scrollTo('services')} className="text-xl font-medium text-left" data-testid="link-mobile-services">Services</button>
           <button onClick={() => scrollTo('how-it-works')} className="text-xl font-medium text-left" data-testid="link-mobile-how">How It Works</button>
@@ -238,7 +277,7 @@ export default function Home() {
       )}
 
       {/* 1. Hero */}
-      <section id="hero" className="pt-32 pb-24 md:pt-44 md:pb-32 bg-hero-gradient relative overflow-hidden">
+      <section id="hero" className="pt-40 pb-24 md:pt-52 md:pb-32 bg-hero-gradient relative overflow-hidden">
         {/* Drifting color blobs */}
         <div className="absolute top-10 right-[10%] w-96 h-96 rounded-full bg-rose-300/30 blur-3xl animate-blob" aria-hidden="true"></div>
         <div className="absolute bottom-0 left-[5%] w-80 h-80 rounded-full bg-amber-200/40 blur-3xl animate-blob-slow" aria-hidden="true"></div>

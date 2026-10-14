@@ -98,6 +98,10 @@
   html {
     scroll-behavior: smooth;
   }
+  /* Keep section tops clear of the fixed announcement bar and menu */
+  section[id] {
+    scroll-margin-top: 6.5rem;
+  }
   body {
     @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20;
   }
