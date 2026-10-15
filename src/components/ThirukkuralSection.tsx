@@ -12,13 +12,49 @@ export const THIRUKKURAL_PDF = "/downloads/thirukkural-10-couplets-oliwia-from-p
    /hit adds one and returns the new total, /get only reads it.
    Note: a counter that gets no clicks for about 6 months is deleted by the service. */
 const COUNTER_BASE = "https://abacus.jasoncameron.dev";
-const COUNTER_PATH = "poland-oliwiakonieczna-info/thirukkural-pdf-button";
+const COUNTER_NS = "poland-oliwiakonieczna-info";
+const KEY_TOTAL = "thirukkural-pdf-button";
+const KEY_INDIA = "thirukkural-pdf-in";
+const KEY_POLAND = "thirukkural-pdf-pl";
 const COUNT_EVENT = "thirukkural-downloads";
 
 let countedThisVisit = false;
 
-const TRANSLATED = 10;
-const TOTAL_KURALS = 1330;
+type Counts = { total: number; india: number; poland: number };
+
+/* Where is the visitor? We only look at the time zone set on their device,
+   nothing is looked up and nothing personal is sent. This shows where people
+   are, not their nationality. */
+function regionKey(): string | null {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    if (tz === "Asia/Kolkata" || tz === "Asia/Calcutta") return KEY_INDIA;
+    if (tz === "Europe/Warsaw") return KEY_POLAND;
+  } catch {
+    /* unknown */
+  }
+  return null;
+}
+
+function hit(key: string) {
+  return fetch(`${COUNTER_BASE}/hit/${COUNTER_NS}/${key}`, { keepalive: true })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => (d && typeof d.value === "number" ? (d.value as number) : null))
+    .catch(() => null);
+}
+
+function read(key: string) {
+  return fetch(`${COUNTER_BASE}/get/${COUNTER_NS}/${key}`, { cache: "no-store" })
+    .then((r) => (r.status === 404 ? { value: 0 } : r.ok ? r.json() : null))
+    .then((d) => (d && typeof d.value === "number" ? (d.value as number) : null))
+    .catch(() => null);
+}
+
+async function readAll(): Promise<Counts | null> {
+  const [total, india, poland] = await Promise.all([read(KEY_TOTAL), read(KEY_INDIA), read(KEY_POLAND)]);
+  if (total === null) return null;
+  return { total, india: india ?? 0, poland: poland ?? 0 };
+}
 
 /* Count one click on the download button (once per page visit, so double
    clicks are not counted twice). The PDF link works on its own, so if the
@@ -26,34 +62,43 @@ const TOTAL_KURALS = 1330;
 function countDownload() {
   if (countedThisVisit) return;
   countedThisVisit = true;
-  try {
-    fetch(`${COUNTER_BASE}/hit/${COUNTER_PATH}`, { keepalive: true })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (d && typeof d.value === "number") {
-          window.dispatchEvent(new CustomEvent(COUNT_EVENT, { detail: d.value }));
-        }
-      })
-      .catch(() => {});
-  } catch {
-    /* ignore */
-  }
+  const region = regionKey();
+  Promise.all([hit(KEY_TOTAL), region ? hit(region) : Promise.resolve(null)])
+    .then(() => readAll())
+    .then((c) => {
+      if (c) window.dispatchEvent(new CustomEvent(COUNT_EVENT, { detail: c }));
+    })
+    .catch(() => {});
 }
 
-/* The faint number in the footer corner. Hidden completely if the counter
-   service cannot be reached, so visitors never see an error. */
+const FlagIndia = () => (
+  <svg viewBox="0 0 15 10" className="inline-block w-[15px] h-[10px] align-[-1px] rounded-[1px]" aria-hidden="true">
+    <rect width="15" height="10" fill="#FF9933" />
+    <rect y="3.33" width="15" height="3.34" fill="#FFFFFF" />
+    <rect y="6.67" width="15" height="3.33" fill="#138808" />
+    <circle cx="7.5" cy="5" r="1.2" fill="none" stroke="#000080" strokeWidth="0.45" />
+  </svg>
+);
+
+const FlagPoland = () => (
+  <svg viewBox="0 0 15 10" className="inline-block w-[15px] h-[10px] align-[-1px] rounded-[1px]" aria-hidden="true">
+    <rect width="15" height="5" fill="#FFFFFF" />
+    <rect y="5" width="15" height="5" fill="#DC143C" />
+  </svg>
+);
+
+/* The faint numbers in the footer corner: total, India, Poland, and
+   everyone else or unknown. Hidden completely if the counter service
+   cannot be reached, so visitors never see an error. */
 export function DownloadCounter({ className = "" }: { className?: string }) {
-  const [count, setCount] = useState<number | null>(null);
+  const [c, setC] = useState<Counts | null>(null);
 
   useEffect(() => {
     let alive = true;
-    fetch(`${COUNTER_BASE}/get/${COUNTER_PATH}`, { cache: "no-store" })
-      .then((r) => (r.status === 404 ? { value: 0 } : r.ok ? r.json() : null))
-      .then((d) => {
-        if (alive && d && typeof d.value === "number") setCount(d.value);
-      })
-      .catch(() => {});
-    const onCount = (e: Event) => setCount((e as CustomEvent<number>).detail);
+    readAll().then((v) => {
+      if (alive && v) setC(v);
+    });
+    const onCount = (e: Event) => setC((e as CustomEvent<Counts>).detail);
     window.addEventListener(COUNT_EVENT, onCount);
     return () => {
       alive = false;
@@ -61,18 +106,25 @@ export function DownloadCounter({ className = "" }: { className?: string }) {
     };
   }, []);
 
-  if (count === null) return null;
+  if (c === null) return null;
+  const other = Math.max(c.total - c.india - c.poland, 0);
   return (
     <span
-      className={className}
-      title="Thirukkural PDF downloads"
+      className={`${className} inline-flex items-center gap-2.5`}
+      title={`Thirukkural PDF downloads: ${c.total} total, ${c.india} India, ${c.poland} Poland, ${other} elsewhere or unknown`}
       aria-hidden="true"
       data-testid="text-download-counter"
     >
-      {count}
+      <span data-testid="count-total">{c.total}</span>
+      <span className="inline-flex items-center gap-1"><span className="opacity-40"><FlagIndia /></span><span data-testid="count-in">{c.india}</span></span>
+      <span className="inline-flex items-center gap-1"><span className="opacity-40"><FlagPoland /></span><span data-testid="count-pl">{c.poland}</span></span>
+      <span className="inline-flex items-center gap-1"><span>?</span><span data-testid="count-other">{other}</span></span>
     </span>
   );
 }
+
+const TRANSLATED = 10;
+const TOTAL_KURALS = 1330;
 
 const inside = [
   {

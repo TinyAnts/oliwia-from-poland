@@ -127,8 +127,13 @@ Abacus: `https://abacus.jasoncameron.dev/hit/poland-oliwiakonieczna-info/thirukk
 A page visit counts at most once, so double clicks are not counted twice. Nothing
 has to be set up in Cloudflare.
 
-- The total shows as a faint 10px number in the bottom-left corner of the footer
-  (white at 9% opacity). Highlight the corner to read it.
+- The footer's bottom-left corner shows, faintly: total, India flag + count,
+  Poland flag + count, and "?" + everyone else or unknown (total minus the two).
+  Location comes only from the visitor's device time zone (Asia/Kolkata or
+  Asia/Calcutta = India, Europe/Warsaw = Poland), so it shows where people are,
+  not their nationality. Nothing personal is sent. Extra counter keys:
+  `thirukkural-pdf-in` and `thirukkural-pdf-pl` in the same namespace. Downloads
+  from before the split count under "?".
 - To check the number directly, open
   `https://abacus.jasoncameron.dev/get/poland-oliwiakonieczna-info/thirukkural-pdf-button`.
   It returns `{"value": N}`. Before the first click it says "Key not found".
